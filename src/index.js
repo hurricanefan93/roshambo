@@ -3,13 +3,13 @@ import './styles/screen.scss'
 
 const $ = s => document.querySelector(s)
 const $$ = s => document.querySelectorAll(s)
+
 let playerScore = 0
 let computerScore = 0
 
 const handleButtonClick = (event) => {
   const player = event.target.className
   const computer = getComputerMove()
-  let playerDidWin = false
   $('figure.player img').src = `https://tiy-tpa-fee.github.io/roshambo/starter-kit/images/${player}.svg`
   $('figure.computer img').src = `https://tiy-tpa-fee.github.io/roshambo/starter-kit/images/${computer}.svg`
 
@@ -34,22 +34,21 @@ const handleButtonClick = (event) => {
       computerScore++
     }
   }
+
   $('span.player').textContent = playerScore
   $('span.computer').textContent = computerScore
-  if (playerScore === 2) {
+  if (playerScore === 3) {
     gameOver(true)
-  } if (computerScore === 2) {
+  } if (computerScore === 3) {
     gameOver(false)
   }
 }
-// HINT: Check for win, lose or draw, then call `gameOver()` eventually.
 
 const getComputerMove = () => {
   const moves = ['rock', 'paper', 'scissors']
   return moves[Math.floor(Math.random() * moves.length)]
 }
 
-// HINT: Try calling `gameOver(true)` in the console.
 const gameOver = (playerDidWin) => {
   if (playerDidWin) {
     $('.dialog h3').textContent = 'You won!'
@@ -64,7 +63,6 @@ const gameOver = (playerDidWin) => {
 }
 
 const resetGame = () => {
-// TODO: Probably need to do more to reset the game here...
   $('figure.player img').src = 'https://tiy-tpa-fee.github.io/roshambo/starter-kit/images/unknown.svg'
   $('figure.computer img').src = 'https://tiy-tpa-fee.github.io/roshambo/starter-kit/images/unknown.svg'
   $('body').className = ''
